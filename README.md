@@ -17,7 +17,7 @@ A lightweight, robust automated test suite built with **Java**, **Playwright**, 
 
 1. Clone the repository:
    ```bash
-   git clone <your-repository-url>
+   git clone https://github.com/AKN-1996/fireflyz-automation-demo
 
 ## ⚠️ Known Limitations
 * **Search Flight Redirection**: The automation handles selecting destinations and inputting travel dates flawlessly. However, proceeding beyond the final "Search" button is currently blocked by environmental Web Application Firewall (WAF) / Cloudflare anti-bot security configurations.
