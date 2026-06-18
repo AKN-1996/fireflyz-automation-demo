@@ -23,6 +23,7 @@ public class TravelInsuranceTests extends BaseTest {
         page.locator("[id='header-search-form-calendar-done']").click();
         page.locator("div:nth-of-type(10) > button").click();
         // Unable to proceed from this point forward due to site setting
+        page.waitForTimeout(5000);
     }
 
 

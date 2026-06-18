@@ -18,3 +18,11 @@ A lightweight, robust automated test suite built with **Java**, **Playwright**, 
 1. Clone the repository:
    ```bash
    git clone <your-repository-url>
+
+## ⚠️ Known Limitations
+* **Search Flight Redirection**: The automation handles selecting destinations and inputting travel dates flawlessly. However, proceeding beyond the final "Search" button is currently blocked by environmental Web Application Firewall (WAF) / Cloudflare anti-bot security configurations.
+
+### Blocked State Reference
+Below is the screen capture encountered upon executing the automated submission step:
+
+![Cloudflare Block Error](screenshots/firefly_blocked_error.png)
