@@ -14,7 +14,7 @@ public class BaseTest {
     public void launchBrowser() {
         playwright = Playwright.create();
 
-        // Pass the OS-level argument to start Chromium maximized
+        // Start with maximized window
         browser = playwright.chromium().launch(new BrowserType.LaunchOptions()
                 .setHeadless(false)
                 .setArgs(Arrays.asList("--start-maximized")));
