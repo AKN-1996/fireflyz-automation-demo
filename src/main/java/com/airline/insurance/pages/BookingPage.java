@@ -15,22 +15,22 @@ public class BookingPage {
         this.page = page;
         this.cookieAcceptButton = page.locator("button#btn-accept-cookie, button:has-text('Accept All'), .cookie-close-icon");
 
-        // The input fields are all we need now!
+        // Input Fields
         this.departureInput = page.locator("[id='header-search-form-departure-station-input']");
         this.arrivalInput = page.locator("[id='header-search-form-arrival-station-input']");
     }
 
     /**
-     * Simulates human typing and explicitly clicks the matching station code badge.
+     * Simulate typing and select based on code badge
      */
     public void enterFromDestination(String stationCode) {
         departureInput.click();
         departureInput.clear(); // Always good practice to clear dynamic fields first
 
-        // Simulates a human typing character-by-character to trigger the site's JS filter
+        // Simulate typing to trigger JS filter
         departureInput.pressSequentially(stationCode, new Locator.PressSequentiallyOptions().setDelay(150));
 
-        // Look inside the departure dropdown specifically for the text (e.g., "KUL") and click it
+        // Search dropdown for airport code and click
         page.locator("[id='header-search-form-departure-station-list']")
                 .getByText(stationCode, new Locator.GetByTextOptions().setExact(false))
                 .first()
@@ -38,16 +38,16 @@ public class BookingPage {
     }
 
     /**
-     * Simulates human typing and explicitly clicks the matching station code badge.
+     * Simulate typing and select based on code badge
      */
     public void enterToDestination(String stationCode) {
         arrivalInput.click();
         arrivalInput.clear();
 
-        // Simulates a human typing character-by-character
+        // Simulate typing by character
         arrivalInput.pressSequentially(stationCode, new Locator.PressSequentiallyOptions().setDelay(150));
 
-        // Look inside the arrival dropdown specifically for the text (e.g., "PEN") and click it
+        // Search dropdown for airport code and click
         page.locator("[id='header-search-form-arrival-station-list']")
                 .getByText(stationCode, new Locator.GetByTextOptions().setExact(false))
                 .first()
@@ -70,7 +70,7 @@ public class BookingPage {
     }
 
     /**
-     * Maps a 3-letter month abbreviation to its 0-indexed equivalent for the web calendar.
+     * Map 3-letter month abbreviation to 0-indexed calendar
      */
     private String getZeroIndexedMonth(String monthAbbreviation) {
         return switch (monthAbbreviation.toUpperCase()) {
@@ -91,7 +91,7 @@ public class BookingPage {
     }
 
     /**
-     * Clicks the depart input field to open the calendar, then selects the exact date.
+     * Click depart input field, select date
      * Expected format: "dd MMM yyyy" (e.g., "04 Jul 2026" or "18 Jun 2026")
      */
     public void selectDepartDate(String dateString) {
@@ -103,14 +103,11 @@ public class BookingPage {
     }
 
     /**
-     * Clicks the return input field to open the calendar, then selects the exact date.
+     * Select return date
      * Expected format: "dd MMM yyyy" (e.g., "08 Jul 2026")
      */
     public void selectReturnDate(String dateString) {
-        // 1. Click the input to open the calendar UI (Update this locator to match your actual input field)
-        //page.locator("#header-search-form-return-date").click();
 
-        // 2. Select the specific date
         clickCalendarDate(dateString);
     }
 
@@ -118,11 +115,11 @@ public class BookingPage {
      * Core logic to parse the date and click the precise DOM element.
      */
     private void clickCalendarDate(String dateString) {
-        // Split "04 Jul 2026" into parts
+        // Split date into parts
         String[] dateParts = dateString.split(" ");
-        String day = dateParts[0];             // "04"
-        String monthAbbrev = dateParts[1];     // "Jul"
-        String year = dateParts[2];            // "2026"
+        String day = dateParts[0];             
+        String monthAbbrev = dateParts[1];     
+        String year = dateParts[2];            
 
         // Translate the month
         String domMonthIndex = getZeroIndexedMonth(monthAbbrev);
